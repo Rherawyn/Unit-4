@@ -7,16 +7,18 @@ float x;
 void setup() {
   background(167, 248, 255);
   size(1200, 800);
-  fill(random(0,100), 200, random(0,100));//103, 222, 123
+  fill(random(0, 100), 200, random(0, 100));//103, 222, 123
   strokeWeight(3);
-  stroke(random(0,100), 200, random(0,100));//94, 206, 113
+  stroke(random(0, 100), 200, random(0, 100));//94, 206, 113
   ellipse(600, 550, 2000, 650);
   x = -75;
   y = 200;
 
-  for (int i = 0; i < 40; i += 1) {
-    tree(x+=random(75,150), y+random(-20,20), random(0.6,0.7), 0);
-    if (x>500) {
+  for (int i = 0; i < 70; i += 1) {
+    tree(x+=random(75, 150), y+random(-20, 20), random(0.6, 0.7), 0);
+    if (x>200 && x<775 && y>300 && y<650) {
+      x=775;
+    } else if (x>1200) {
       x=-75;
       y=y+100;
     }
@@ -52,7 +54,7 @@ void roots(int x, int y) {
 
 void leaves(int x, int  y) {
   fill(random(0, 100), random(0, 255), random(0, 255));
-  strokeWeight(2);
+  strokeWeight(3);
   stroke(random(0, 100), random(0, 255), random(0, 255));
   circle(x+25, y-30, random(60, 125));
   circle(x+30, y-50, random(60, 125));
