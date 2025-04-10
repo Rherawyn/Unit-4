@@ -73,7 +73,7 @@ void trunk(int x, int y) {
 }
 
 void leaves(int x, int  y) {
-  fill(random(0, 100), random(0, 255), random(0, 255));
+  fill(random(0, 100), random(0, 255), random(0, 255), random(100,200));
   strokeWeight(3);
   stroke(random(0, 100), random(0, 255), random(0, 255));
   while (l<random(5, 10)) {
