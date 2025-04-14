@@ -6,6 +6,7 @@ float x;
 float l;
 float r;
 float b;
+float w;
 
 void setup() {
   background(167, 248, 255);
@@ -17,6 +18,7 @@ void setup() {
   l = 0;
   r = 0;
   b = 0;
+  w = 0;
   x = -75;
   y = 200;
 
@@ -29,8 +31,13 @@ void setup() {
       y=y+100;
     }
   }
+
+  for (int h = 0; h < random(5, 7); h += 1) {
+    house(random(200, 650), random(325, 575), 1, 0);
+  }
 }
 
+// TREE STUFF ============================================================
 void tree(float x, float y, float s, float r) {
   pushMatrix();
   translate(x-300, y-250);
@@ -51,7 +58,7 @@ void roots(int x, int y) {
   strokeWeight(10);
   stroke(120, 65, 23);
   while (r<random(2, 4)) {
-    line(random(400,450),575,random(375,475),random(585,615));
+    line(random(400, 450), 575, random(375, 475), random(585, 615));
     r=r+1;
   }
 }
@@ -60,7 +67,7 @@ void branches(int x, int y) {
   strokeWeight(10);
   stroke(120, 65, 23);
   while (b<random(2, 4)) {
-    line(random(405,445),400,random(325,525),random(325,410));
+    line(random(405, 445), 400, random(325, 525), random(325, 410));
     b=b+1;
   }
 }
@@ -73,11 +80,67 @@ void trunk(int x, int y) {
 }
 
 void leaves(int x, int  y) {
-  fill(random(0, 100), random(0, 255), random(0, 255), random(100,200));
+  fill(random(0, 100), random(0, 255), random(0, 255), random(100, 200));
   strokeWeight(3);
   stroke(random(0, 100), random(0, 255), random(0, 255));
   while (l<random(5, 10)) {
     circle(random(325, 525), random(325, 410), random(60, 100));
     l = l+1;
   }
+}//end of tree stuff ==================================================================
+
+//HOUSE STUFF
+
+void house(float x, float y, float s, float r) {
+  pushMatrix();
+  translate(x, y);
+  scale(s);
+  radians(r);
+  chimney(-300, -300);
+  wall(-300, -300);
+  roof(-300, -300);
+  window(-300, -300);
+  door(-300, -300);
+  popMatrix();
+}
+
+void wall(int x, int y) {
+  rect(300, 300, 200, 200);
+}
+
+void roof(int x, int y) {
+  triangle(270, 300, 530, 300, 400, random(200, 280));
+}
+
+void chimney(int x, int y) {
+  rect(random(300, 450), random(190, 220), 50, 100);
+}
+
+void window(int x, int y) {
+  while (w<random(0, 2)) {
+    windowgood(random(350, 450), random(325, 400), random(0.9, 1.1));
+    w = w+1;
+  }
+}
+
+void door(int x, int y) {
+  doorgood(random(300, 450), 425);
+}
+
+void windowgood(float x, float y, float s) {
+  pushMatrix();
+  translate(x, y);
+  scale(s);
+  circle(0, 0, 50);
+  line(0, -25, 0, 25);
+  line(-25, 0, 25, 0);
+  popMatrix();
+}
+
+void doorgood(float x, float y) {
+  pushMatrix();
+  translate(x, y);
+  rect(0, 0, 50, 75);
+  circle(random(5, 45), 30, 10);
+  popMatrix();
 }
