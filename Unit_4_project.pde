@@ -22,7 +22,7 @@ void setup() {
   x = -75;
   y = 200;
 
-  for (int i = 0; i < 70; i += 1) {
+  for (int i = 0; i < 30; i += 1) {
     tree(x+=random(75, 150), y+random(-20, 20), random(0.6, 0.7), 0);
     if (x>200 && x<775 && y>300 && y<650) {
       x=775;
@@ -32,8 +32,18 @@ void setup() {
     }
   }
 
-  for (int h = 0; h < random(5, 7); h += 1) {
-    house(random(200, 650), random(325, 575), 1, 0);
+  for (int h = 0; h < random(4, 6); h += 1) {
+    house(random(400, 850), random(475, 700), random(0.5, 0.6), 0);
+  }
+
+  for (int i = 0; i < 40; i += 1) {
+    tree(x+=random(75, 150), y+random(-20, 20), random(0.6, 0.7), 0);
+    if (x>200 && x<775 && y>300 && y<650) {
+      x=775;
+    } else if (x>1200) {
+      x=-75;
+      y=y+100;
+    }
   }
 }
 
@@ -48,7 +58,6 @@ void tree(float x, float y, float s, float r) {
   trunk(0, 0);
   leaves(0, 0);
   l = 0;
-  r = 0;
   b = 0;
   popMatrix();
 }
@@ -57,6 +66,7 @@ void roots(int x, int y) {
   fill(116, 61, 23);
   strokeWeight(10);
   stroke(120, 65, 23);
+  r = 0;
   while (r<random(2, 4)) {
     line(random(400, 450), 575, random(375, 475), random(585, 615));
     r=r+1;
@@ -93,37 +103,41 @@ void leaves(int x, int  y) {
 
 void house(float x, float y, float s, float r) {
   pushMatrix();
-  translate(x, y);
+  translate(x-300, y-300);
   scale(s);
   radians(r);
-  chimney(-300, -300);
-  wall(-300, -300);
-  roof(-300, -300);
-  window(-300, -300);
-  door(-300, -300);
+  chimney(x, y);
+  wall(x, y);
+  roof(x, y);
+  window(x, y);
+  door(x, y);
+  w = 0;
   popMatrix();
 }
 
-void wall(int x, int y) {
+void wall(float x, float y) {
+  fill(random(0, 255), random(0, 255), random(0, 100));
+  stroke(random(0, 255), random(0, 255), random(0, 100));
   rect(300, 300, 200, 200);
 }
 
-void roof(int x, int y) {
+void roof(float x, float y) {
+  fill(random(0, 255), random(0, 255), random(0, 100));
   triangle(270, 300, 530, 300, 400, random(200, 280));
 }
 
-void chimney(int x, int y) {
+void chimney(float x, float y) {
   rect(random(300, 450), random(190, 220), 50, 100);
 }
 
-void window(int x, int y) {
-  while (w<random(0, 2)) {
+void window(float x, float y) {
+  while (w<random(2)) {
     windowgood(random(350, 450), random(325, 400), random(0.9, 1.1));
     w = w+1;
   }
 }
 
-void door(int x, int y) {
+void door(float x, float y) {
   doorgood(random(300, 450), 425);
 }
 
