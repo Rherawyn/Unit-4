@@ -1,6 +1,8 @@
 //Gabriel Altshuler
 //Unit 4 Project 2-4
 
+float k;
+
 float y;
 float x;
 float l;
@@ -9,7 +11,13 @@ float b;
 float w;
 
 void setup() {
-  background(167, 248, 255);
+  k = int(random(2));
+  if (k == 0) {
+    background(167, 248, 255);
+  } else {
+    background(30, 0, 62);
+  }
+  
   size(1200, 800);
   fill(random(0, 100), 200, random(0, 100));//103, 222, 123
   strokeWeight(3);
@@ -52,7 +60,7 @@ void tree(float x, float y, float s, float r) {
   pushMatrix();
   translate(x-300, y-250);
   scale(s);
-  radians(r);
+  rotate(radians(r));
   roots(0, 0);
   branches(0, 0);
   trunk(0, 0);
@@ -105,7 +113,7 @@ void house(float x, float y, float s, float r) {
   pushMatrix();
   translate(x-300, y-300);
   scale(s);
-  radians(r);
+  rotate(radians(r));
   chimney(x, y);
   wall(x, y);
   roof(x, y);
