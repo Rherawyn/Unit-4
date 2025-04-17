@@ -14,10 +14,14 @@ void setup() {
   k = int(random(2));
   if (k == 0) {
     background(167, 248, 255);
+    for ( int c = 0; c < random(3, 4); c += 1) {
+      cloud(random(0, 1200), random(50, 100));
+    }
   } else {
     background(30, 0, 62);
+    moon(random(0,1200),random(50,100));
   }
-  
+
   size(1200, 800);
   fill(random(0, 100), 200, random(0, 100));//103, 222, 123
   strokeWeight(3);
@@ -164,5 +168,35 @@ void doorgood(float x, float y) {
   translate(x, y);
   rect(0, 0, 50, 75);
   circle(random(5, 45), 30, 10);
+  popMatrix();
+}
+// END OF HOUSE STUFF =======================================================
+
+//background stuff ============================================================
+
+void cloud(float x, float y) {
+  pushMatrix();
+  translate(x, y);
+  fill(250, 250, 250, random(175, 200));
+  stroke(255, 255, 255, random(175, 200));
+  strokeWeight(0);
+  ellipse(random(-75, 75), random(-50, 50), random(50, 100), random(50, 100));
+  ellipse(random(-75, 75), random(-50, 50), random(50, 100), random(50, 100));
+  ellipse(random(-75, 75), random(-50, 50), random(50, 100), random(50, 100));
+  ellipse(random(-75, 75), random(-50, 50), random(50, 100), random(50, 100));
+  ellipse(random(-75, 75), random(-50, 50), random(50, 100), random(50, 100));
+  popMatrix();
+}
+
+void moon(float x, float y) {
+  pushMatrix();
+  translate(x,y);
+  fill(255);
+  stroke(250);
+  strokeWeight(3);
+  circle(0, 0, 80);
+  fill(30, 0, 62);
+  stroke(30, 0, 62);
+  circle(random(-40, 40), 0, 65);
   popMatrix();
 }
