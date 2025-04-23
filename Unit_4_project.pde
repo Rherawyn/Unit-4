@@ -3,6 +3,7 @@
 
 float k;
 float g;
+int og;
 float s;
 
 float y;
@@ -14,12 +15,15 @@ float w;
 float u;
 float o;
 int c;
+int n;
 
 void setup() {
   c = int(random(0, 3));
+  //c = 1;
   k = int(random(2));
   if (k == 0) {
     background(167, 248, 255);
+    sun(random(0, 1200), random(50, 100), 0.8, random(0,256));
     for ( int c = 0; c < random(3, 4); c += 1) {
       cloud(random(0, 1200), random(50, 100));
     }
@@ -41,8 +45,10 @@ void setup() {
     stroke(240, 240, random(240, 255));
   }
   ellipse(600, 550, 2000, 650);
-  g = 0;
-  s = 290;
+  g = 440;
+  og = 440;
+  s = 230;
+  n = 760;
   l = 0;
   r = 0;
   b = 0;
@@ -52,9 +58,15 @@ void setup() {
   x = -75;
   y = 200;
 
-  for (int i = 0; i < 3500; i += 1) {
+  for (int i = 0; i < 3675; i += 1) {
     grass(g+=random(5, 15), s+random(3, 5));
-    if (g>1200) {
+    if (s < 270) {
+      if (g>n) {
+        g = og -= 150;
+        n = n + 150;
+        s = s+random(17, 20);
+      }
+    } else if (g>1200) {
       g = 0;
       s = s+random(17, 20);
     }
@@ -136,14 +148,14 @@ void trunk(int x, int y) {
 void leaves(int x, int  y) {
   strokeWeight(3);
   if (c==0) {
-  fill(random(0, 100), random(0, 255), random(0, 255), random(100, 200));
-  stroke(random(0, 100), random(0, 255), random(0, 255));
+    fill(random(0, 100), random(0, 255), random(0, 255), random(100, 200));
+    stroke(random(0, 100), random(0, 255), random(0, 255));
   } else if (c==1) {
-  fill(random(0, 255), random(0, 250), random(0, 50), random(100, 200));
-  stroke(random(0, 255), random(0, 250), random(0, 50));
+    fill(random(0, 255), random(0, 250), random(0, 50), random(100, 200));
+    stroke(random(0, 255), random(0, 250), random(0, 50));
   } else {
-  fill(random(210, 240), random(240, 240), random(230, 250), random(100, 200));
-  stroke(random(210, 240), random(240, 240), random(230, 250));
+    fill(random(210, 240), random(240, 240), random(230, 250), random(100, 200));
+    stroke(random(210, 240), random(240, 240), random(230, 250));
   }
   while (l<random(5, 10)) {
     circle(random(325, 525), random(325, 410), random(60, 100));
@@ -179,6 +191,7 @@ void roof(float x, float y) {
 }
 
 void chimney(float x, float y) {
+  fill(random(0, 255), random(0, 255), random(0, 100));
   rect(random(300, 450), random(190, 220), 50, 100);
 }
 
@@ -238,6 +251,22 @@ void moon(float x, float y) {
   fill(30, 0, 62);
   stroke(30, 0, 62);
   circle(random(-40, 40), 0, 65);
+  popMatrix();
+}
+
+void sun (float x, float y, float s, float r) {
+  pushMatrix();
+  translate(x, y);
+  scale(s);
+  rotate(radians(r));
+  fill(random(230,255),random(250,255),0);
+  stroke(random(220,255),random(230,255),0);
+  strokeWeight(2);
+  circle(0,0, 80);
+  for (int i = 0; i < 10; i += 1) {
+    rotate(radians(36));
+    triangle(-4, 50, 4, 50, 0, 75);
+  }
   popMatrix();
 }
 
