@@ -14,27 +14,50 @@ float b;
 float w;
 float u;
 float o;
+float t;
 int c;
 int n;
 
 void setup() {
+  t = random(0, 1200);
   c = int(random(0, 3));
-  //c = 1;
   k = int(random(2));
-  if (k == 0) {
-    background(167, 248, 255);
-    sun(random(0, 1200), random(50, 100), 0.8, random(0,256));
-    for ( int c = 0; c < random(3, 4); c += 1) {
-      cloud(random(0, 1200), random(50, 100));
+  if (k == 0) { // day or night variable
+    if (c == 2) {
+      //if (t >900) {
+      //  background(167, 0, 255);
+      //} else if (t < 300) {
+      //  background(0, 248, 255);
+      //} else {
+      //  background(167, 248, 255);
+      //}
+      for ( int c = 0; c < 60; c += 1) { // clouds when it snows during the day
+        cloud(random(-50, 1250), random(25, 125));
+      }
+    } else {
+      if (t >900) {
+        background(250, 150, 80);
+      } else if (t < 300) {
+        background(0, 248, 255);
+      } else {
+        background(167, 248, 255);
+      }
+      sun(t, random(50, 100), 0.8, random(0, 256)); // clouds any other time
+      for ( int c = 0; c < random(3, 4); c += 1) {
+        cloud(random(0, 1200), random(50, 100));
+      }
     }
   } else {
     background(30, 0, 62);
+    for ( int c = 0; c < random(15, 20); c += 1) { // stars at night
+      star(random(0, 1200), random(0, 250), random(0.4, 0.5), random(0, 361));
+    }
     moon(random(0, 1200), random(50, 100));
   }
 
   size(1200, 800);
   strokeWeight(3);
-  if (c==0) {
+  if (c==0) { // variable for the differant colour tones
     fill(random(0, 100), 200, random(0, 100));//103, 222, 123
     stroke(random(0, 100), 200, random(0, 100));//94, 206, 113
   } else if (c==1) {
@@ -44,7 +67,7 @@ void setup() {
     fill(250, 250, random(250, 255));
     stroke(240, 240, random(240, 255));
   }
-  ellipse(600, 550, 2000, 650);
+  ellipse(600, 550, 2000, 650); // ground
   g = 440;
   og = 440;
   s = 230;
@@ -58,7 +81,7 @@ void setup() {
   x = -75;
   y = 200;
 
-  for (int i = 0; i < 3675; i += 1) {
+  for (int i = 0; i < 3675; i += 1) { // function for grass
     grass(g+=random(5, 15), s+random(3, 5));
     if (s < 270) {
       if (g>n) {
@@ -74,7 +97,7 @@ void setup() {
 
   print(c);
 
-  for (int i = 0; i < 30; i += 1) {
+  for (int i = 0; i < 30; i += 1) { // function for trees behind the houses
     tree(x+=random(75, 150), y+random(-20, 20), random(0.6, 0.7), 0);
     if (x>200 && x<775 && y>300 && y<650) {
       x=775;
@@ -84,7 +107,7 @@ void setup() {
     }
   }
 
-  for (int h = 0; h < random(4, 6); h += 1) {
+  for (int h = 0; h < random(4, 6); h += 1) { // function for houses
     house(u+=random(150, 200), o+random(30, 60), random(0.5, 0.6), 0);
     if (u>750) {
       u = 300;
@@ -92,13 +115,18 @@ void setup() {
     }
   }
 
-  for (int i = 0; i < 40; i += 1) {
+  for (int i = 0; i < 40; i += 1) { // function for trees in front of the houses
     tree(x+=random(75, 150), y+random(-20, 20), random(0.6, 0.7), 0);
     if (x>200 && x<775 && y>300 && y<650) {
       x=775;
     } else if (x>1200) {
       x=-75;
       y=y+100;
+    }
+  }
+  if (c==2) { // function for stars at night
+    for ( int c = 0; c < random(3000, 5000); c += 1) {
+      star(random(0, 1200), random(0, 800), random(0.1, 0.2), random(0, 361));
     }
   }
 }
@@ -163,7 +191,7 @@ void leaves(int x, int  y) {
   }
 }//end of tree stuff ==================================================================
 
-//HOUSE STUFF
+//HOUSE STUFF  ========================================================================
 
 void house(float x, float y, float s, float r) {
   pushMatrix();
@@ -259,10 +287,10 @@ void sun (float x, float y, float s, float r) {
   translate(x, y);
   scale(s);
   rotate(radians(r));
-  fill(random(230,255),random(250,255),0);
-  stroke(random(220,255),random(230,255),0);
+  fill(random(230, 255), random(250, 255), 0);
+  stroke(random(220, 255), random(230, 255), 0);
   strokeWeight(2);
-  circle(0,0, 80);
+  circle(0, 0, 80);
   for (int i = 0; i < 10; i += 1) {
     rotate(radians(36));
     triangle(-4, 50, 4, 50, 0, 75);
@@ -287,3 +315,34 @@ void grass(float x, float y) {
   triangle(-2, 0, 2, 0, random(-1, 1), random(-14, -16));
   popMatrix();
 }
+
+void star(float x, float y, float s, float r) {
+  pushMatrix();
+  translate(x, y);
+  scale(s);
+  rotate(radians(r));
+  stroke(240, 240, 255);
+  strokeWeight(1);
+  for (int i = 0; i < 2; i += 1) {
+    rotate(radians(90));
+    line(-50, 0, 50, 0);
+  }
+  pushMatrix();
+  rotate(radians(45));
+  noFill();
+  square(-16, -16, 32);
+  popMatrix();
+  fill(255);
+  for (int i = 0; i < 5; i += 1) {
+    rotate(radians(72));
+    triangle(-2, 10, 2, 10, 0, 25);
+  }
+  rotate(radians(36));
+  for (int i = 0; i < 5; i += 1) {
+    rotate(radians(72));
+    triangle(-2, 5, 2, 5, 0, 20);
+  }
+  popMatrix();
+}
+
+// END OF BACKGROUND STUFF =======================================================
