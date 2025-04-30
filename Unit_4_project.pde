@@ -24,21 +24,21 @@ void setup() {
   k = int(random(2));
   if (k == 0) { // day or night variable
     if (c == 2) {
-      //if (t >900) {
-      //  background(167, 0, 255);
-      //} else if (t < 300) {
-      //  background(0, 248, 255);
-      //} else {
-      //  background(167, 248, 255);
-      //}
+        if (t >900) {
+        background(255, 150, 70);
+      } else if (t < 300) {
+        background(167, 248, 255);
+      } else {
+        background(167, 248, 255);
+      }
       for ( int c = 0; c < 60; c += 1) { // clouds when it snows during the day
         cloud(random(-50, 1250), random(25, 125));
       }
     } else {
       if (t >900) {
-        background(250, 150, 80);
+        background(255, 150, 70);
       } else if (t < 300) {
-        background(0, 248, 255);
+        background(220, 210, 250);
       } else {
         background(167, 248, 255);
       }
